@@ -1,0 +1,36 @@
+{
+  "caption": "Пункт рецепту",
+  "description": "Пункт рецепту",
+  // "descriptionAttribute": "name",
+  "attributes": [
+    {
+      "name": "recipe",
+      "dataType": "Entity",
+      "associatedEntity": "calc_recipe",
+      "size": 255,
+      "caption": "Рецепт",
+      "description": "Рецепт",
+      "allowNull": false
+    },
+    {
+      "name": "product",
+      "dataType": "Entity",
+      "associatedEntity": "calc_product",
+      "size": 255,
+      "caption": "Назва продукту",
+      "description": "Назва продукту",
+      "allowNull": false
+    },{
+      "name": "weight",
+      "dataType": "Int",
+      "size": 255,
+      "caption": "Вага",
+      "description": "Вага",
+      "allowNull": false
+    }
+  ],
+  "mixins": {
+    "mStorage": {
+    }
+  }
+}

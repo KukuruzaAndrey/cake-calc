@@ -1,0 +1,27 @@
+{
+  "name": "ub-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate for UB5",
+  "private": true,
+  "main": "index.js",
+  "scripts": {},
+  "engines": {
+    "ub": "^5.0"
+  },
+  "keywords": [],
+  "author": "andrii.kukuruza <andrii.kukuruza@inbase.com.ua> (https://unitybase.info)",
+  "license": "ISC",
+  "dependencies": {
+    "@unitybase/adminui-pub": "^5.8.6",
+    "@unitybase/adminui-reg": "^5.1.15",
+    "@unitybase/adminui-vue": "^1.4.3",
+    "@unitybase/base": "^5.1.8",
+    "@unitybase/cdn": "^5.1.8",
+    "@unitybase/ub": "^5.2.11",
+    "@unitybase/uba": "^5.1.22",
+    "@unitybase/ubs": "^5.2.8"
+  },
+  "devDependencies": {
+    "@unitybase/ubcli": "^5.3.14"
+  }
+}

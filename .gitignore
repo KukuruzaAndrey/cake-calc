@@ -1,0 +1,5 @@
+stores/
+node_modules/
+*.sql
+.idea/
+docker-compose.yml

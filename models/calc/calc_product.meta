@@ -1,0 +1,26 @@
+{
+  "caption": "Продукт",
+  "description": "Продукт",
+  "descriptionAttribute": "name",
+  "attributes": [
+    {
+      "name": "name",
+      "dataType": "String",
+      "size": 255,
+      "caption": "Назва продукту",
+      "description": "Назва продукту",
+      "allowNull": false
+    },
+    {
+      "name": "picture",
+      "dataType": "Document",
+      "caption":"Зображення",
+      "description" :"Зображення",
+      "storename": "avatars"
+    }
+  ],
+  "mixins": {
+    "mStorage": {
+    }
+  }
+}

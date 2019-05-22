@@ -1,0 +1,19 @@
+{
+  "caption": "Рецепт",
+  "description": "Рецепт",
+  "descriptionAttribute": "name",
+  "attributes": [
+    {
+      "name": "name",
+      "dataType": "String",
+      "size": 255,
+      "caption": "Назва рецепту",
+      "description": "Назва рецепту",
+      "allowNull": false
+    }
+  ],
+  "mixins": {
+    "mStorage": {
+    }
+  }
+}

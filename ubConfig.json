@@ -1,0 +1,100 @@
+{
+  "httpServer": {
+//    "serverType": "Socket",
+    "host": "+",
+    "port": "8881",
+    "inetPub": "./pub"
+  },
+  "logging": {
+    "path": "./logs",
+    "levels": [],
+    "rotationSizeInMB": 100
+  },
+  "security": {
+//    "authenticationMethods": [
+//      "UB"
+//    ]
+  },
+  "uiSettings": {
+   "adminUI": {
+    //      //Settings for admin UI
+          "endpoint": "adm"
+//      "defaultPasswordForDebugOnly": "admin",
+//      "themeName": "UBGrayTheme",
+////      "endpoint": "index.html",
+////      "loginURL": "/models/adminui-vue/views/ub-auth.html",
+//      "customSidebar": true, // set to true to not create sidebar
+//      "customNavbar": true, // set to true to not create navbar
+//      "vueAutoForms": true
+    }
+  },
+  "application": {
+    "defaultLang": "uk",
+    "domain": {
+      "models": [
+        {
+          "path": "./node_modules/@unitybase/ub"
+        },
+        {
+          "path": "./node_modules/@unitybase/uba"
+        },
+        {
+          "path": "./node_modules/@unitybase/ubs"
+        },
+        {
+          "path": "./node_modules/@unitybase/cdn"
+        },
+        {
+          "path": "./node_modules/@unitybase/ubm"
+        },
+        {
+          "path": "./node_modules/@unitybase/ub-pub"
+        },
+        {
+          "path": "./node_modules/@unitybase/adminui-pub"
+        },
+        {
+          "path": "./node_modules/@unitybase/adminui-reg"
+        },
+        {
+          "path": "./node_modules/@unitybase/adminui-vue"
+        },
+        {
+          "name": "calc",
+          "path": "./models/calc"
+        }
+      ]
+    },
+    "connections": [
+      {
+        "name": "main",
+        "driver": "SQLite3",
+        "isDefault": true,
+        "dialect": "SQLite3",
+        "databaseName": "./mainDB.sqlite3",
+        "supportLang": [
+          "uk"
+        ],
+        "advSettings": "Synchronous=On"
+      }
+    ],
+    "blobStores": [
+      {
+        "name": "mdb",
+        "storeType": "Virtual",
+        "tempPath": "./documents/avatars/_temp"
+      },
+      {
+        "name": "avatars",
+        "path": "./pub/img",
+        "tempPath": "./documents/avatars/_temp",
+        "historyDepth": 0,
+        "storeSize": "Simple",
+        "keepOriginalFileNames": false
+      }
+    ],
+    "customSettings": {
+      "customSetting": true
+    }
+  }
+}
