@@ -7,8 +7,40 @@ const productCard = (name, imgPath) =>
 </div>`
 
 document.getElementById('fileinput').addEventListener('change', function () {
-  const [file] = this.files;
-  const reader = new FileReader();
+
+  const [file] = this.files
+  UB.connection.addNew({ entity: 'calc_product', fieldList: ['ID'] })
+    .then(res => {
+      const [[ID]] = res.resultData.data
+      UB.connection.setDocument(file, {
+        entity: 'calc_product',
+        ID,
+        attribute: 'picture',
+        origName: file.name
+      }).then(res =>
+        UB.connection.insert({
+          entity: 'calc_product',
+          fieldList: ['ID', 'name', 'picture'],
+          execParams: { ID, name: 'newName', picture: res }
+        })
+      ).then(UB.logDebug)
+
+      // return ID
+    })
+  // .then(ID => UB.connection.setDocument(file, {
+  //   entity: 'calc_product',
+  //   id: ID,
+  //   attribute: 'picture',
+  //   origName: file.name
+  // }))
+  // .then(res => UB.connection.insert({
+  //   entity: 'calc_product',
+  //   fieldList: ['ID', 'name'],
+  //   execParams: { name: 'newName', picture: res }
+  // }))
+  // .then(UB.logDebug)
+
+  // const reader = new FileReader()
 
   // Closure to capture the file information.
   // reader.onload = e => {
@@ -24,16 +56,16 @@ document.getElementById('fileinput').addEventListener('change', function () {
   // }
   // reader.readAsDataURL(file);
 
-  UB.connection.setDocument(file, { entity: 'calc_product', attribute: 'picture', origName: file.name })
-    .then((res) =>{
-      console.log(res)
-      UB.connection.insert({
-        entity: 'calc_product',
-        fieldList: ['ID', 'name'],
-        execParams: { name: 'newName', picture: res }
-      })}
-    ).then(UB.logDebug)
-
+  // UB.connection.setDocument(file, { entity: 'calc_product', attribute: 'picture', origName: file.name })
+  //   .then((res) => {
+  //       console.log(res)
+  //       UB.connection.insert({
+  //         entity: 'calc_product',
+  //         fieldList: ['ID', 'name'],
+  //         execParams: { name: 'newName', picture: res }
+  //       })
+  //     }
+  //   ).then(UB.logDebug)
 
   //
   //   (function (theFile) {
@@ -48,15 +80,13 @@ document.getElementById('fileinput').addEventListener('change', function () {
 
   // Read in the image file as a data URL.
 
-
   // console.log(file)
   // This code is only for demo ...
-  console.log('name : ' + file.name);
-  console.log('size : ' + file.size);
-  console.log('type : ' + file.type);
-  console.log('date : ' + file.lastModified);
-}, false);
-
+  // console.log('name : ' + file.name)
+  // console.log('size : ' + file.size)
+  // console.log('type : ' + file.type)
+  // console.log('date : ' + file.lastModified)
+}, false)
 
 UB.connect({ host: window.location.origin }).then(
   conn => {
@@ -75,9 +105,8 @@ getProducts = () => {
 createCardProduct = (name, imgPath) => {
   const card = document.createElement('div')
   card.innerHTML = productCard(name, imgPath)
-  document.body.appendChild(card);
+  document.body.appendChild(card)
 }
-
 
 // function hexToBase64(str) {
 //   return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
