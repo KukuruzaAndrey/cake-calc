@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Продуктовий калькулятор</title>
+    <title>Продукти</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
     <script src="/clientRequire/@unitybase/ub-pub/dist/ub-pub.min.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -12,7 +12,6 @@
 
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Продуктовий калькулятор</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -22,10 +21,10 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link" href="products.html">Продукти</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="recipes.html">Рецепти</a>
             </li>
         </ul>
@@ -33,7 +32,7 @@
 </nav>
 
 <div class="jumbotron">
-    <h1 class="display-4">Продуктовий калькулятор</h1>
+    <h1 class="display-4">Рецепти</h1>
     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
         featured content or information.</p>
     <!--    <hr class="my-4">-->
@@ -42,7 +41,52 @@
 </div>
 
 
-<!--<script src="product.js"></script>-->
+<div class="addRecipe mx-5">
+    <h3>Додати рецепт</h3>
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Введіть назву рецепту</label>
+                <input id="recipeName" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="form-row recipeRecord">
+            <div class="form-group col-md-4">
+                <small>Продукт</small>
+                <select class="custom-select productSelector"></select>
+            </div>
+            <div class="form-group col-md-2">
+                <small>Вага</small>
+                <div class="input-group">
+                    <input type="number" class="form-control productWeight" value="100">
+                    <div class="input-group-append">
+                        <span class="input-group-text">гр.</span>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="removeRecipeRecord" class="mt-4 mb-3 btn btn-outline-danger">-</button>
+        </div>
+        <div class="form-row col-md-6">
+            <button type="button" id="addRecipeRecord" class="mx-auto btn btn-outline-success btn-sm">+</button>
+        </div>
+        <button type="button" class="btn btn-primary" id="addRecipe">Додати новий рецепт</button>
+    </form>
+</div>
+
+<div class="recipes">
+    <h2 class="text-center">Ваші рецепти</h2>
+</div>
+
+<div id='toast' style="position: absolute; left: 10px">
+    <div class="toast" data-delay="2000" aria-live="polite" aria-atomic="true">
+        <div class="toast-body">
+            <h4>Рецепт додано!</h4>
+        </div>
+    </div>
+</div>
+
+
+<script src="recipes.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

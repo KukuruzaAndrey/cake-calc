@@ -1,0 +1,35 @@
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    /*margin: 10px;*/
+    transition-duration: 0.1s;
+}
+
+.product:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    height: 12rem;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.custom-file * {
+    /*padding: 5px auto;*/
+}
+
+.recipe img {
+    height: 6rem;
+    object-fit: cover;
+}
