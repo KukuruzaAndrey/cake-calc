@@ -20,7 +20,8 @@
       "caption": "Назва продукту",
       "description": "Назва продукту",
       "allowNull": false
-    },{
+    },
+    {
       "name": "weight",
       "dataType": "Int",
       "size": 255,

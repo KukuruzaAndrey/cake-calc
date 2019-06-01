@@ -10,6 +10,35 @@
       "caption": "Назва рецепту",
       "description": "Назва рецепту",
       "allowNull": false
+    },
+    {
+      "name": "picture",
+      "dataType": "Document",
+      "caption": "Зображення",
+      "description": "Зображення",
+      "storename": "avatars"
+    },
+    {
+      "name": "formType",
+      "dataType": "Enum",
+      "enumGroup": "FORM_TYPE",
+      "caption": "Форма",
+      "description": "Форма",
+      "allowNull": false
+    },
+    {
+      "name": "size",
+      "dataType": "Int",
+      "caption": "Розмір",
+      "description": "Розмір",
+      "allowNull": false
+    },
+    {
+      "name": "description",
+      "dataType": "Text",
+      "size": 255,
+      "caption": "Опис",
+      "description": "Опис"
     }
   ],
   "mixins": {

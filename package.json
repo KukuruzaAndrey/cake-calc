@@ -18,6 +18,7 @@
     "@unitybase/base": "^5.1.8",
     "@unitybase/cdn": "^5.1.8",
     "@unitybase/ub": "^5.2.11",
+    "@unitybase/ub-migrate": "^1.7.1",
     "@unitybase/uba": "^5.1.22",
     "@unitybase/ubs": "^5.2.8"
   },
