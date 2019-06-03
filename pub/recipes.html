@@ -32,12 +32,7 @@
 </nav>
 
 <div class="jumbotron">
-    <h1 class="display-4">Рецепти</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-        featured content or information.</p>
-    <!--    <hr class="my-4">-->
-    <!--    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>-->
-    <!--    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
+    <h1 class="display-4 text-center">Рецепти</h1>
 </div>
 
 
@@ -48,6 +43,35 @@
             <div class="form-group col-md-6">
                 <label>Введіть назву рецепту</label>
                 <input id="recipeName" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="from-row">
+            <div class="custom-file col-md-6">
+                <input type="file" class="custom-file-input" id="fileinput">
+                <label class="custom-file-label" for="fileinput">Додайте зображення</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <small>Розмір</small>
+                <select id="sizeSelector" class="custom-select"></select>
+            </div>
+            <div class="form-group col-md-3">
+                <small>Тип</small>
+                <select id="typeSelector" class="custom-select">
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                </select>
             </div>
         </div>
         <div class="form-row recipeRecord">
@@ -64,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" id="removeRecipeRecord" class="mt-4 mb-3 btn btn-outline-danger">-</button>
+            <button type="button" class="removeRecipeRecord mt-4 mb-3 btn btn-outline-danger">-</button>
         </div>
         <div class="form-row col-md-6">
             <button type="button" id="addRecipeRecord" class="mx-auto btn btn-outline-success btn-sm">+</button>

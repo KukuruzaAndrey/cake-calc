@@ -2,64 +2,17 @@ UB.connect({ host: window.location.origin }).then(
   conn => {
     getRecipes()
     fillProductSelector()
-    fillSizeSelector()
   }
 )
 
 const fillProductSelector = () => {
-  UB.Repository('calc_product')
-    .attrs(['ID', 'name', 'picture'])
-    .selectAsObject().then(response => {
+  UB.Repository('calc_product').attrs(['ID', 'name', 'picture'])
+    .selectAsObject().then(function (response) {
     const selector = document.querySelector('.addRecipe .productSelector')
     selector.innerHTML = response.map(({ ID, name }) => `<option value="${ID}">${name}</option>`)
       .join('')
   })
 }
-
-const fillSizeSelector = () => {
-  UB.Repository('ubm_enum')
-    .attrs(['ID', 'eGroup', 'code', 'name'])
-    .where('eGroup', '=', 'CAKE_FORM_TYPE')
-    .selectAsObject().then(response => {
-    const selector = document.querySelector('#sizeSelector')
-    selector.innerHTML = response.map(({ code, name }) => `<option value="${code}">${name}</option>`)
-      .join('')
-  })
-}
-
-
-document.getElementById('fileinput').addEventListener('change', function () {
-  const [file] = this.files
-  UB.connection.addNew({ entity: 'calc_recipe', fieldList: ['ID'] })
-    .then(res => {
-      const [[ID]] = res.resultData.data
-      UB.connection.setDocument(file, {
-        entity: 'calc_recipe',
-        ID,
-        attribute: 'picture',
-        origName: file.name
-      }).then(picture => {
-          document.querySelector('#addRecipe').addEventListener('click', (e) => {
-            const recipeName = document.querySelector('#recipeName').value
-            const recipeRecords = (document.querySelectorAll('.recipeRecord'))
-            addRecipe(recipeName)
-              .then(res => res.resultData.data[0][0])
-              .then(recipeID => {
-                recipeRecords.forEach(recipeRecord => addRecipeRecord(
-                  recipeID,
-                  recipeRecord.querySelector('.productSelector').value,
-                  recipeRecord.querySelector('.productWeight').value,
-                ))
-              })
-              .then(() => {
-                $('#toast').css('top', window.pageYOffset + 10);
-                $('.toast').toast('show')
-              })
-          })
-        }
-      )
-    })
-}, false)
 
 document.querySelector('#addRecipeRecord').addEventListener('click', (e) => {
   const recipeRecord = document.querySelector('.addRecipe .form-row:nth-child(2)')
@@ -88,6 +41,23 @@ addRecipeRecord = (recipe, product, weight) =>
     execParams: { recipe, product, weight }
   })
 
+document.querySelector('#addRecipe').addEventListener('click', (e) => {
+  const recipeName = document.querySelector('#recipeName').value
+  const recipeRecords = (document.querySelectorAll('.recipeRecord'))
+  addRecipe(recipeName)
+    .then(res => res.resultData.data[0][0])
+    .then(recipeID => {
+      recipeRecords.forEach(recipeRecord => addRecipeRecord(
+        recipeID,
+        recipeRecord.querySelector('.productSelector').value,
+        recipeRecord.querySelector('.productWeight').value,
+      ))
+    })
+    .then(() => {
+      $('#toast').css('top', window.pageYOffset + 10);
+      $('.toast').toast('show')
+    })
+})
 
 const recipeCard = (ID, name, recipeRecords) =>
   `<div class="recipe">
@@ -111,24 +81,51 @@ const recipeCard = (ID, name, recipeRecords) =>
     </div>
 </div>`
 
+// document.getElementById('fileinput').addEventListener('change', function () {
+//   const [file] = this.files
+//   UB.connection.addNew({ entity: 'calc_product', fieldList: ['ID'] })
+//     .then(res => {
+//       const [[ID]] = res.resultData.data
+//       UB.connection.setDocument(file, {
+//         entity: 'calc_product',
+//         ID,
+//         attribute: 'picture',
+//         origName: file.name
+//       }).then(res => {
+//           const name = document.querySelector('#productName').value
+//           document.querySelector('#addProduct').addEventListener('click', () => {
+//             UB.connection.insert({
+//               entity: 'calc_product',
+//               fieldList: ['ID', 'name', 'picture'],
+//               execParams: { ID, name, picture: res }
+//             }).then(() => {
+//               $('#toast').css('top', window.pageYOffset + 10);
+//               $('.toast').toast('show')
+//             })
+//           })
+//         }
+//       )
+//     })
+// }, false)
+
 
 getRecipes = () => {
-  UB.Repository('calc_recipe').attrs(['ID', 'name'])
+  const recipes = UB.Repository('calc_recipe').attrs(['ID', 'name'])
     .selectAsObject().then(function (recipes) {
-    recipes.forEach(({ ID, name }) => {
-      UB.Repository('calc_recipe_record').attrs(['ID', 'recipe', 'product.name', 'product.picture', 'weight'])
-        .where('recipe', '=', ID)
-        .selectAsObject()
-        .then(function (recipeRecords) {
-          for (const recipeRecord of recipeRecords) {
-            recipeRecord['product.picture'] = JSON.parse(recipeRecord['product.picture']).fName
-          }
-          renderRecipeCard(ID, name, recipeRecords)
-        })
-      // renderRecipeCard()
+      recipes.forEach(({ ID, name }) => {
+        UB.Repository('calc_recipe_record').attrs(['ID', 'recipe', 'product.name', 'product.picture', 'weight'])
+          .where('recipe', '=', ID)
+          .selectAsObject()
+          .then(function (recipeRecords) {
+            for (const recipeRecord of recipeRecords) {
+              recipeRecord['product.picture'] = JSON.parse(recipeRecord['product.picture']).fName
+            }
+            renderRecipeCard(ID, name, recipeRecords)
+          })
+        // renderRecipeCard()
+      })
+      // renderCardProduct(prod.name, JSON.parse(prod.picture).fName)})
     })
-    // renderCardProduct(prod.name, JSON.parse(prod.picture).fName)})
-  })
 }
 renderRecipeCard = (ID, name, recipeRecords) => {
   const card = document.createElement('div')

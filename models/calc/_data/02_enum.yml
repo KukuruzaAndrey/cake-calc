@@ -1,6 +1,6 @@
 $context:
   type: enums
 
-FORM_TYPE:
+CAKE_FORM_TYPE:
   - circle: Круг
   - square: Квадрат

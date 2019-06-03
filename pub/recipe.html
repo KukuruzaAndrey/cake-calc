@@ -21,10 +21,10 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item ">
                 <a class="nav-link" href="products.html">Продукти</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="recipes.html">Рецепти</a>
             </li>
         </ul>
@@ -32,35 +32,14 @@
 </nav>
 
 <div class="jumbotron">
-    <h1 class="display-4">Продукти</h1>
+    <h1 class="display-4 text-center">Рецепти</h1>
 </div>
 
-
-<div class="products">
-
-    <div class="card product m-2" style="width: 18rem;">
-        <div class="card-body">
-            <input id="productName" type="text" class="form-control" placeholder="Введіть ім'я продукту">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="fileinput">
-                <label class="custom-file-label" for="fileinput">Додайте зображення</label>
-            </div>
-            <button type="button" class="btn btn-primary" id="addProduct">Додати новий продукт</button>
-        </div>
-    </div>
-
+<div class="recipes">
+    <h2 class="text-center">Ваші рецепти</h2>
 </div>
 
-<div id='toast' style="position: absolute; left: 10px" >
-    <div class="toast" data-delay="2000"  aria-live="polite" aria-atomic="true">
-        <div class="toast-body">
-           <h3>Продукт додано!</h3>
-        </div>
-    </div>
-</div>
-
-
-<script src="product.js"></script>
+<script src="recipes.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
