@@ -4,7 +4,7 @@ UB.connect({ host: window.location.origin }).then(
     console.log(ID)
     getRecipe(ID)
     // fillProductSelector()
-    // fillTypeSelector()
+    fillTypeSelector()
   }
 )
 
@@ -18,17 +18,16 @@ const fillProductSelector = () => {
   })
 }
 
-const fillSizeSelector = () => {
+const fillTypeSelector = () => {
   UB.Repository('ubm_enum')
     .attrs(['ID', 'eGroup', 'code', 'name'])
     .where('eGroup', '=', 'CAKE_FORM_TYPE')
     .selectAsObject().then(response => {
-    const selector = document.querySelector('#sizeSelector')
+    const selector = document.querySelector('#chooseTypeSelector')
     selector.innerHTML = response.map(({ code, name }) => `<option value="${code}">${name}</option>`)
       .join('')
   })
 }
-
 
 // document.getElementById('fileinput').addEventListener('change', function () {
 //   const [file] = this.files
@@ -111,11 +110,11 @@ const recipeCard = (ID, name, imgPath, formType, size, description, recipeRecord
         <div class="form-row">
             <div class="form-group col-md-3">
                 <small>Тип</small>
-                <input value="${formType}" readonly id="sizeSelector" type="text" class="form-control-plaintext">
+                <input value="${formType}" readonly id="typeSelector" type="text" class="form-control-plaintext">
             </div>
             <div class="form-group col-md-3">
                 <small>Розмір</small>
-                <input value="${size}" readonly id="typeSelector" type="text" class="form-control-plaintext">
+                <input value="${size}" readonly id="sizeSelector" type="text" class="form-control-plaintext">
             </div>
         </div>
 
@@ -135,7 +134,6 @@ const recipeCard = (ID, name, imgPath, formType, size, description, recipeRecord
        `).join('')}
         </ul>
         <div class="form-group col-md-6">
-            <label for="recipeDescription">Опис рецепту</label>
             <textarea readonly class="form-control-plaintext" id="recipeDescription" rows="3">${description}</textarea>
         </div>
     </form>

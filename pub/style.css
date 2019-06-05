@@ -29,8 +29,13 @@
     /*padding: 5px auto;*/
 }
 
-.recipe img {
-    height: 6rem;
+form li img {
+    height: 6rem !important;
+    object-fit: cover;
+}
+
+.view-recipe img {
+    height: 400px;
     object-fit: cover;
 }
 
