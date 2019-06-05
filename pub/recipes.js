@@ -2,7 +2,7 @@ UB.connect({ host: window.location.origin }).then(
   conn => {
     getRecipes()
     fillProductSelector()
-    fillSizeSelector()
+    fillTypeSelector()
   }
 )
 
@@ -16,12 +16,12 @@ const fillProductSelector = () => {
   })
 }
 
-const fillSizeSelector = () => {
+const fillTypeSelector = () => {
   UB.Repository('ubm_enum')
     .attrs(['ID', 'eGroup', 'code', 'name'])
     .where('eGroup', '=', 'CAKE_FORM_TYPE')
     .selectAsObject().then(response => {
-    const selector = document.querySelector('#sizeSelector')
+    const selector = document.querySelector('#typeSelector')
     selector.innerHTML = response.map(({ code, name }) => `<option value="${code}">${name}</option>`)
       .join('')
   })
@@ -33,6 +33,7 @@ document.getElementById('fileinput').addEventListener('change', function () {
   UB.connection.addNew({ entity: 'calc_recipe', fieldList: ['ID'] })
     .then(res => {
       const [[ID]] = res.resultData.data
+      console.log(ID)
       UB.connection.setDocument(file, {
         entity: 'calc_recipe',
         ID,
@@ -41,8 +42,12 @@ document.getElementById('fileinput').addEventListener('change', function () {
       }).then(picture => {
           document.querySelector('#addRecipe').addEventListener('click', (e) => {
             const recipeName = document.querySelector('#recipeName').value
-            const recipeRecords = (document.querySelectorAll('.recipeRecord'))
-            addRecipe(recipeName)
+            const recipeSize = document.querySelector('#sizeSelector').value
+            const recipeType = document.querySelector('#typeSelector').value
+            const recipeDescription = document.querySelector('#recipeDescription').value
+
+            const recipeRecords = document.querySelectorAll('.recipeRecord')
+            addRecipe(ID, recipeName, picture, recipeType, recipeSize, recipeDescription)
               .then(res => res.resultData.data[0][0])
               .then(recipeID => {
                 recipeRecords.forEach(recipeRecord => addRecipeRecord(
@@ -62,7 +67,7 @@ document.getElementById('fileinput').addEventListener('change', function () {
 }, false)
 
 document.querySelector('#addRecipeRecord').addEventListener('click', (e) => {
-  const recipeRecord = document.querySelector('.addRecipe .form-row:nth-child(2)')
+  const recipeRecord = document.querySelector('.addRecipe .form-row:nth-child(4)')
   const clone = recipeRecord.cloneNode(true)
   clone.querySelector('.removeRecipeRecord').addEventListener('click', removeRecipeRecord)
   recipeRecord.parentNode.insertBefore(clone, document.querySelector('.addRecipe .form-row.col-md-6'))
@@ -74,11 +79,11 @@ removeRecipeRecord = (e) => {
 document.querySelector('.removeRecipeRecord').addEventListener('click', removeRecipeRecord)
 
 
-addRecipe = (name) =>
+addRecipe = (ID, name, picture, formType, size, description) =>
   UB.connection.insert({
     entity: 'calc_recipe',
     fieldList: ['ID'],
-    execParams: { name }
+    execParams: { ID, name, picture, formType, size, description }
   })
 
 addRecipeRecord = (recipe, product, weight) =>
@@ -90,8 +95,8 @@ addRecipeRecord = (recipe, product, weight) =>
 
 
 const recipeCard = (ID, name, recipeRecords) =>
-  `<div class="recipe">
-    <a class="btn btn-primary"  aria-expanded="false" href="#h${ID}" role="button" data-toggle="collapse">${name}</a>
+  `<div class="recipe text-center">
+    <a class="btn btn-outline-primary"  aria-expanded="false" href="#h${ID}" role="button" data-toggle="collapse">${name}</a>
     <div id="h${ID}" class="collapse">
         <ul class="list-group">
             ${recipeRecords.map(({ 'product.picture': imgPath, 'product.name': name, weight }) =>
@@ -108,6 +113,7 @@ const recipeCard = (ID, name, recipeRecords) =>
         </li>
        `).join('')}
         </ul>
+    <a class="btn btn-outline-primary"  href="/recipe.html#${ID}">Переглянути повністю</a>        
     </div>
 </div>`
 
@@ -125,9 +131,7 @@ getRecipes = () => {
           }
           renderRecipeCard(ID, name, recipeRecords)
         })
-      // renderRecipeCard()
     })
-    // renderCardProduct(prod.name, JSON.parse(prod.picture).fName)})
   })
 }
 renderRecipeCard = (ID, name, recipeRecords) => {

@@ -33,3 +33,7 @@
     height: 6rem;
     object-fit: cover;
 }
+
+.jumbotron {
+    padding: 2rem 2rem !important
+}

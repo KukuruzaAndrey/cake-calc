@@ -13,7 +13,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Продуктовий калькулятор</a>
+    <a class="navbar-brand" href="/">Продуктовий калькулятор</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,12 +32,11 @@
 </nav>
 
 <div class="jumbotron">
-    <h1 class="display-4">Продукти</h1>
+    <h1 class="text-center">Продукти</h1>
 </div>
 
 
 <div class="products">
-
     <div class="card product m-2" style="width: 18rem;">
         <div class="card-body">
             <input id="productName" type="text" class="form-control" placeholder="Введіть ім'я продукту">
@@ -48,13 +47,12 @@
             <button type="button" class="btn btn-primary" id="addProduct">Додати новий продукт</button>
         </div>
     </div>
-
 </div>
 
-<div id='toast' style="position: absolute; left: 10px" >
-    <div class="toast" data-delay="2000"  aria-live="polite" aria-atomic="true">
+<div id='toast' style="position: absolute; left: 10px">
+    <div class="toast" data-delay="2000" aria-live="polite" aria-atomic="true">
         <div class="toast-body">
-           <h3>Продукт додано!</h3>
+            <h3>Продукт додано!</h3>
         </div>
     </div>
 </div>

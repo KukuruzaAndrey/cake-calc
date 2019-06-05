@@ -13,7 +13,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Продуктовий калькулятор</a>
+    <a class="navbar-brand" href="/">Продуктовий калькулятор</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,7 +32,7 @@
 </nav>
 
 <div class="jumbotron">
-    <h1 class="display-4 text-center">Рецепти</h1>
+    <h1 class="text-center">Рецепти</h1>
 </div>
 
 
@@ -53,12 +53,12 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
-                <small>Розмір</small>
-                <select id="sizeSelector" class="custom-select"></select>
+                <small>Тип</small>
+                <select id="typeSelector" class="custom-select"></select>
             </div>
             <div class="form-group col-md-3">
-                <small>Тип</small>
-                <select id="typeSelector" class="custom-select">
+                <small>Розмір</small>
+                <select id="sizeSelector" class="custom-select">
                     <option value="10">10</option>
                     <option value="11">11</option>
                     <option value="12">12</option>
@@ -92,6 +92,10 @@
         </div>
         <div class="form-row col-md-6">
             <button type="button" id="addRecipeRecord" class="mx-auto btn btn-outline-success btn-sm">+</button>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="recipeDescription">Опис рецепту</label>
+            <textarea class="form-control" id="recipeDescription" rows="3"></textarea>
         </div>
         <button type="button" class="btn btn-primary" id="addRecipe">Додати новий рецепт</button>
     </form>
