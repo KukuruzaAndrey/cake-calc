@@ -1,33 +1,20 @@
 UB.connect({ host: window.location.origin }).then(
   conn => {
-    getRecipes()
+    fillRecipeSelector()
   }
 )
 
-getRecipes = () => {
-  UB.Repository('calc_recipe').attrs(['ID', 'name'])
-    .selectAsObject().then(function (recipes) {
-
-
-    recipes.forEach(({ ID, name }) => {
-      UB.Repository('calc_recipe_record').attrs(['ID', 'recipe', 'product.name', 'product.picture', 'weight'])
-        .where('recipe', '=', ID)
-        .selectAsObject()
-        .then(function (recipeRecords) {
-          for (const recipeRecord of recipeRecords) {
-            recipeRecord['product.picture'] = JSON.parse(recipeRecord['product.picture']).fName
-          }
-          renderRecipeCard(ID, name, recipeRecords)
-        })
-    })
-  })
-}
 
 const fillRecipeSelector = () => {
   UB.Repository('calc_recipe').attrs(['ID', 'name'])
     .selectAsObject().then(function (recipes) {
-    const selector = document.querySelector('.addRecipe .productSelector')
-    selector.innerHTML = response.map(({ ID, name }) => `<option value="${ID}">${name}</option>`)
+    document.querySelector('#recipe').setAttribute('href', `/recipe.html#${recipes[0].ID}`)
+    const selector = document.querySelector('#recipeSelector')
+    selector.innerHTML = recipes.map(({ ID, name }) => `<option value="${ID}">${name}</option>`)
       .join('')
+    selector.addEventListener('change', e => {
+      console.log(e)
+      document.querySelector('#recipe').setAttribute('href', `/recipe.html#${e.target.value}`)
+    })
   })
 }
