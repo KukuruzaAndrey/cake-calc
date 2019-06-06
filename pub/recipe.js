@@ -102,7 +102,7 @@ const recipeCard = (ID, name, imgPath, formType, size, description, recipeRecord
     <form>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label>Назва рецепту</label>
+                <h3><label>Назва рецепту</label></h3>
                 <input value="${name}" readonly id="recipeName" type="text" class="form-control-plaintext">
             </div>
         </div>
@@ -110,11 +110,11 @@ const recipeCard = (ID, name, imgPath, formType, size, description, recipeRecord
         <div class="form-row">
             <div class="form-group col-md-3">
                 <small>Тип</small>
-                <input value="${formType}" readonly id="typeSelector" type="text" class="form-control-plaintext">
+                <input value="${formType}" readonly id="typeOrigin" type="text" class="form-control-plaintext">
             </div>
             <div class="form-group col-md-3">
                 <small>Розмір</small>
-                <input value="${size}" readonly id="sizeSelector" type="text" class="form-control-plaintext">
+                <input value="${size}" readonly id="sizeOrigin" type="text" class="form-control-plaintext">
             </div>
         </div>
 
@@ -128,17 +128,48 @@ const recipeCard = (ID, name, imgPath, formType, size, description, recipeRecord
                 <input type="text" readonly class="form-control-plaintext productName" value="${name}">
             </div>
             <div class="col">
-                <input type="text" readonly class="form-control-plaintext productWeight" value="${weight}">
+                <input type="text" readonly class="form-control-plaintext productWeight" data-origin="${weight}" value="${weight}">
             </div>
         </li>
        `).join('')}
         </ul>
         <div class="form-group col-md-6">
-            <textarea readonly class="form-control-plaintext" id="recipeDescription" rows="3">${description}</textarea>
+            <textarea readonly class="form-control-plaintext" id="recipeDescription"  rows="8">${description}</textarea>
         </div>
     </form>
 </div>`
 
+
+
+document.querySelector('#change').addEventListener('click', e => {
+
+  const originRecipeSize = document.querySelector('#sizeOrigin').value
+  const originRecipeType = document.querySelector('#typeOrigin').value
+
+  const chooseRecipeSize = document.querySelector('#chooseSizeSelector').value
+  const chooseRecipeType = document.querySelector('#chooseTypeSelector').value
+
+  console.log(originRecipeSize, originRecipeType, chooseRecipeSize, chooseRecipeType)
+
+  const pl = (type, size) => {
+    if (type === 'circle') {
+      return 3.14*(size^2)/4
+    } else {
+      return size^2
+    }
+  }
+
+  const koef = pl(originRecipeType, originRecipeSize)/pl(chooseRecipeType, chooseRecipeSize)
+  console.log(koef)
+
+
+  const productWeights = document.querySelectorAll('.productWeight')
+  productWeights.forEach(node =>  {
+    console.log(node.value)
+    node.value = Number(node.dataset.origin/koef).toFixed(3)
+  })
+
+})
 
 getRecipe = (ID) => {
   UB.Repository('calc_recipe').attrs(['ID', 'name', 'picture', 'formType', 'size', 'description'])

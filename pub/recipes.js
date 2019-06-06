@@ -96,7 +96,7 @@ addRecipeRecord = (recipe, product, weight) =>
 
 const recipeCard = (ID, name, recipeRecords) =>
   `<div class="recipe text-center">
-    <a class="btn btn-outline-primary"  aria-expanded="false" href="#h${ID}" role="button" data-toggle="collapse">${name}</a>
+    <a class="btn btn-outline-primary my-2"  aria-expanded="false" href="#h${ID}" role="button" data-toggle="collapse">${name}</a>
     <div id="h${ID}" class="collapse">
         <ul class="list-group">
             ${recipeRecords.map(({ 'product.picture': imgPath, 'product.name': name, weight }) =>
@@ -113,7 +113,7 @@ const recipeCard = (ID, name, recipeRecords) =>
         </li>
        `).join('')}
         </ul>
-    <a class="btn btn-outline-primary"  href="/recipe.html#${ID}">Переглянути повністю</a>        
+    <a class="btn btn-light"  href="/recipe.html#${ID}">Переглянути повністю</a>        
     </div>
 </div>`
 
